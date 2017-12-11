@@ -1,0 +1,131 @@
+<!-- 
+This is "display type" view for handling the Plastic Logic web application(Smart display). Contains ordered list of display types
+# Copyright (C) 2017 Plastic Logic 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Plastic Logic App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <script src="bootstrap/dist/js/jquery-3.0.0.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+</head>
+<!-- NAVBAR
+  ================================================== -->
+
+<body>
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="home">
+                            <img src="./assets/PL_13.png" alt="">
+                        </a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="home">Home</a></li>
+                            <li class="active"><a href="display_type">Display Type</a></li>
+                            <li><a href="upload_image">Upload</a></li>
+                            <li><a href="settings">Settings</a></li>
+                            <!-- <li><a href="console">console</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <script type="text/javascript">
+        $.ajax({
+            url: '/sendCurrentDisplayType',
+            type: "GET",
+            cache: false,
+            async: "true",
+            complete: function(data) {
+                console.log(data)
+                console.log(data.responseJSON)
+                var obj = data.responseJSON
+                var current_DisplayType = obj[0].currentdisplayType
+
+                display_Type.innerText = "Display Type: " + current_DisplayType;
+                display_Type.style.fontWeight = 'bold';
+               console.log(current_DisplayType)
+               alert('after selecting display type please wait for 10seconds to reload')
+               $('.list-group-item').focus(function(){
+                $(this).css('background-color', '#4CAF50')})
+                }
+
+        });
+
+
+        function toAutoDetect() {
+            $.ajax({
+                url: '/toAutoDetect',
+                type: "GET",
+                cache: false,
+                async: "true",
+                complete: function() {
+                    console.log('received toAutoDetect');
+                }
+            });
+        }
+        </script>
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-5">
+                        <div>
+                            <button class="btn btn-primary center-block" onclick="toAutoDetect()">Auto Detect</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 offset-md-5"></div>
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <h2 id='display_Type' value="bold" >Display Type: </h2>
+                        <div class="list-group">
+                            <a href="S115_T1.1" class="list-group-item list-group-item-action" id='S115_T1.1'>11.5"</a>
+                            <a href="D107_T3.1" class="list-group-item list-group-item-action" id="D107_T3.1">10.7"</a>
+                            <a href="S079_T1.1" class="list-group-item list-group-item-action" id="S079_T1.1">7.9"</a>
+                            <a href="S049_T1.1" class="list-group-item list-group-item-action" id="S049_T1.1">4.9"</a>
+                            <a href="S047_T2.1" class="list-group-item list-group-item-action" id="S047_T2.1">4.7"</a>
+                            <a href="S040_T1.1" class="list-group-item list-group-item-action" id="S040_T1.1">4.0"</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
+

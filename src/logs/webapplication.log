@@ -1,0 +1,433 @@
+Listening on localhost port 80
+received sendCurrentDisplayType select
+[ { currentdisplayType: 'select' } ]
+The file has been saved! sed -i '/display_type/c\display_type D107_T3.1' /boot/uboot/config.txt
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             Physical Resolution: 1280x960
+
+null
+229
+1280 960
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             Physical Resolution: 1280x960
+
+null
+229
+1280 960
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             load_nvm_content?: 0
+s1d135xx         Product code: 0x004F
+s1d135xx         Rev: 0100, conf: 001E
+s1d13524_controller Ready 1280x960
+max17135         rev 0x00, id 0x4D
+max17135         timings  on: vgl=12, vsl=7, vsh=2, vgh=23
+max17135         timings off: vgl=7, vsl=12, vsh=14, vgh=2
+generic_epdc     Setting vcom: 6241
+vcom             input: 6241, scaled: 6178, DAC reg: 0x65
+max17135         calculate: 6241, 101
+generic_epdc     Loading wflib: /tmp/dummy.generic.wbf
+generic_epdc     Setting vcom: 4000
+vcom             input: 4000, scaled: 3959, DAC reg: 0x30
+max17135         calculate: 4000, 48
+
+false false false
+received display type D107_T3.1
+child process exited with code 0
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+upload_showImageList
+[ '00.png',
+  '01.png',
+  '04.png',
+  '06.png',
+  '07.png',
+  '21.png',
+  '22.png',
+  '23.png',
+  '24.png',
+  '25.png' ]
+06.png
+epdc-app -update_image /boot/uboot/D107_T3.1/img/06.png
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+upload_showImageList
+[ '00.png',
+  '01.png',
+  '04.png',
+  '06.png',
+  '07.png',
+  '21.png',
+  '22.png',
+  '23.png',
+  '24.png',
+  '25.png' ]
+received getWaveform_modes
+upload_showwaveDirList
+[ [ 'waveform.wbf' ], { current_WaveFile: '' } ]
+[ { wavemodes: 
+     [ [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object] ] },
+  { current_mode: 'select' },
+  { current_vcom: 'select' } ]
+received getWaveform_modes
+upload_showwaveDirList
+[ [ 'waveform.wbf' ], { current_WaveFile: '' } ]
+[ { wavemodes: 
+     [ [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object] ] },
+  { current_mode: 'select' },
+  { current_vcom: 'select' } ]
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+The file has been saved! sed -i '/display_type/c\display_type D107_T3.1' /boot/uboot/config.txt
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             Physical Resolution: 1280x960
+
+null
+229
+1280 960
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             Physical Resolution: 1280x960
+
+null
+229
+1280 960
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             load_nvm_content?: 0
+s1d135xx         Product code: 0x004F
+s1d135xx         Rev: 0100, conf: 001E
+s1d13524_controller Ready 1280x960
+max17135         rev 0x00, id 0x4D
+max17135         timings  on: vgl=12, vsl=7, vsh=2, vgh=23
+max17135         timings off: vgl=7, vsl=12, vsh=14, vgh=2
+generic_epdc     Setting vcom: 6241
+vcom             input: 6241, scaled: 6178, DAC reg: 0x65
+max17135         calculate: 6241, 101
+generic_epdc     Loading wflib: /tmp/dummy.generic.wbf
+generic_epdc     Setting vcom: 4000
+vcom             input: 4000, scaled: 3959, DAC reg: 0x30
+max17135         calculate: 4000, 48
+
+false false false
+received display type D107_T3.1
+child process exited with code 0
+The file has been saved!
+stderr: Segmentation fault
+
+stderr: Segmentation fault
+
+child process exited with code 139
+received sendCurrentDisplayType Segmentation fault
+
+[ { currentdisplayType: 'Segmentation fault\n' } ]
+received sendCurrentDisplayType Segmentation fault
+
+[ { currentdisplayType: 'Segmentation fault\n' } ]
+upload_showImageList
+[]
+received sendCurrentDisplayType Segmentation fault
+
+[ { currentdisplayType: 'Segmentation fault\n' } ]
+The file has been saved! sed -i '/display_type/c\display_type D107_T3.1' /boot/uboot/config.txt
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             Physical Resolution: 1280x960
+
+null
+229
+1280 960
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             Physical Resolution: 1280x960
+
+null
+229
+1280 960
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             load_nvm_content?: 0
+s1d135xx         Product code: 0x004F
+s1d135xx         Rev: 0100, conf: 001E
+s1d13524_controller Ready 1280x960
+max17135         rev 0x00, id 0x4D
+max17135         timings  on: vgl=12, vsl=7, vsh=2, vgh=23
+max17135         timings off: vgl=7, vsl=12, vsh=14, vgh=2
+generic_epdc     Setting vcom: 6241
+vcom             input: 6241, scaled: 6178, DAC reg: 0x65
+max17135         calculate: 6241, 101
+generic_epdc     Loading wflib: /tmp/dummy.generic.wbf
+generic_epdc     Setting vcom: 4000
+vcom             input: 4000, scaled: 3959, DAC reg: 0x30
+max17135         calculate: 4000, 48
+
+false false false
+received display type D107_T3.1
+child process exited with code 0
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+upload_showImageList
+[ '00.png',
+  '01.png',
+  '04.png',
+  '06.png',
+  '07.png',
+  '21.png',
+  '22.png',
+  '23.png',
+  '24.png',
+  '25.png' ]
+received getWaveform_modes
+upload_showwaveDirList
+[ [ 'waveform.wbf' ], { current_WaveFile: '' } ]
+[ { wavemodes: 
+     [ [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object] ] },
+  { current_mode: 'select' },
+  { current_vcom: 'select' } ]
+received default_waveform
+ epdc-app -get_waveform
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+Waveform Version: D107_V2.1_V6C251_V1
+
+false false false
+null
+220
+configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+s1d135xx         Error during waveform file loading.
+../src/main.c, line 215: operation '-set_waveform' failed
+Fatal error
+
+ epdc-app -set_waveform /boot/uboot/D107_T3.1/display/D107_V2.1_V6C251_V1
+received getWaveform_modes
+upload_showwaveDirList
+[ [ 'waveform.wbf' ],
+  { current_WaveFile: 'D107_V2.1_V6C251_V1' } ]
+[ { wavemodes: 
+     [ [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object] ] },
+  { current_mode: 'select' },
+  { current_vcom: 'select' } ]
+received detect_waveform
+ epdc-app -get_waveform
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+Waveform Version: D107_V2.1_V6C251_V1
+
+false false false
+null
+220
+received getWaveform_modes
+upload_showwaveDirList
+[ [ 'waveform.wbf' ],
+  { current_WaveFile: 'D107_V2.1_V6C251_V1' } ]
+[ { wavemodes: 
+     [ [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object] ] },
+  { current_mode: 'select' },
+  { current_vcom: 'select' } ]
+received default_Vcom
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             VCOM: 4005
+
+false false false
+null
+210
+configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+vcom 4005000
+vcom             input: 4005000, scaled: -23805, DAC reg: 0xFFFFFD92
+max17135         calculate: 4005000, -622
+ epdc-app -set_vcom 4005
+received getWaveform_modes
+upload_showwaveDirList
+[ [ 'waveform.wbf' ],
+  { current_WaveFile: 'D107_V2.1_V6C251_V1' } ]
+[ { wavemodes: 
+     [ [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object] ] },
+  { current_mode: 'select' },
+  { current_vcom: '4005' } ]
+received detect_Vcom
+string configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             VCOM: 1999
+
+false false false
+null
+210
+1999
+received getWaveform_modes
+upload_showwaveDirList
+[ [ 'waveform.wbf' ],
+  { current_WaveFile: 'D107_V2.1_V6C251_V1' } ]
+[ { wavemodes: 
+     [ [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object],
+       [Object] ] },
+  { current_mode: 'select' },
+  { current_vcom: '1999' } ]
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]
+upload_showImageList
+[ '00.png',
+  '01.png',
+  '04.png',
+  '06.png',
+  '07.png',
+  '21.png',
+  '22.png',
+  '23.png',
+  '24.png',
+  '25.png' ]
+received sendCurrentDisplayType 10.7in
+[ { currentdisplayType: '10.7in' } ]

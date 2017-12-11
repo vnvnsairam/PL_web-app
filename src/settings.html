@@ -1,0 +1,312 @@
+<!-- 
+This is "settings" view for handling the Plastic Logic web application(Smart display).Uploading, displaying and executing waveforms
+# Copyright (C) 2017 Plastic Logic 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Plastic Logic App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <script src="bootstrap/dist/js/jquery-3.0.0.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="javascripts/uploader_image.js"></script>
+    <script src="javascripts/uploader_waveform.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+</head>
+<!-- NAVBAR
+  ================================================== -->
+
+<body>
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="home">
+                            <img src="./assets/PL_13.png" alt="">
+                        </a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="home">Home</a></li>
+                            <li><a href="display_type">Display Type</a></li>
+                            <li><a href="upload_image">Upload</a></li>
+                            <li class="active"><a href="settings">Settings</a></li>
+                            <!--   <li><a href="console">console</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <script type="text/javascript">
+
+
+        $(document).ready(function() {
+            //called when key is pressed in textbox
+            $("#vcom_value").keypress(function(e) {
+                //if the letter is not digit then display error and don't type anything
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    //display error message
+                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                    return false;
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $(".deleteMe").on("click", function() {
+                //console.log($(this).closest("li")[0].innerText);
+                var text = $(this).closest("li")[0].innerText
+                var name = text.split(/\s+/);
+                name = name[0]
+                console.log(name);
+                $(this).closest("li").remove();
+                doAjax(makeUrl(name));
+
+                function makeUrl(name) {
+                    return '/deleteWave/' + name
+                }
+
+                function doAjax(_url) {
+                    return $.ajax({
+                        url: _url,
+                        cache: false,
+                        async: "true",
+                        type: 'DELETE',
+                        complete: function() {
+                            console.log('delete');
+                        }
+                    });
+                }
+
+
+            });
+        });
+
+
+        $.ajax({
+            url: '/getWaveform_modesList',
+            type: "GET",
+            cache: false,
+            async: "true",
+            complete: function(data) {
+                console.log(data)
+                obj = JSON.parse(data.responseText);
+                console.log(obj)
+
+                var obj_array = obj[0].wavemodes
+                var current_mode = obj[1].current_mode
+                var current_vcom = obj[2].current_vcom
+
+                console.log(current_mode)
+                var waveList = "";
+                var routesWave = "/setWaveform/";
+
+                wf_mode.innerText = "Waveform Mode: " + current_mode;
+                set_vcom.innerText = "Vcom Value: " + current_vcom;
+                waveList += '<option value=" ">' + 'Select...' + '</option>'
+                for (i = 0; i < obj_array.length; i++) {
+                    var WaveRoutes = routesWave + obj_array[i].id
+                    //console.log(WaveRoutes)
+                    waveList += '<option value="' + WaveRoutes + '">' + obj_array[i].id + ' : ' + obj_array[i].name + '</option>'
+                }
+                $("#WaveId").append('<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">' + waveList + "</select>");
+
+            }
+        });
+
+        $.ajax({
+            url: '/upload_showWaveList',
+            type: "GET",
+            cache: false,
+            async: "true",
+            complete: function(data) {
+                console.log(data)
+                console.log(data.responseJSON)
+                var wavelist = data.responseJSON[0]
+                var current_wavefile = data.responseJSON[1].current_WaveFile
+                console.log(current_wavefile)
+                current_WaveFileName.innerText = "Uploaded Wave Files: " + current_wavefile;
+                var list = "";
+                var routeswave = "/upload_wave/";
+                // displays wave list with delete as X
+                for (i = 0; i < wavelist.length; i++) {
+
+                    //var imgName = "<a href= 'javascript:void(0)' class='waveClicked' >" + wavelist[i] + "</a> "
+                    //console.log(imgName);
+                    var waveName = '<a href="' + routeswave + wavelist[i] + '">' + wavelist[i] + '</a>'
+                    //var waveName =  wavelist[i] 
+                    //console.log(waveName);
+                    list += "<li>" + waveName + "<a href= 'javascript:void(0)' class='deleteMe'> X</a> " + "</li>";
+                    //list += "<li>" + waveName +"<div class='deleteMe'>X</div>"+"</li>";
+                    //console.log(list);
+                }
+                $("#waveList").append("<ol>" + list + "</ol>");
+            }
+        });
+
+
+        function default_waveform() {
+            $.ajax({
+                url: '/default_waveform',
+                type: "GET",
+                cache: false,
+                async: "true",
+                complete: function() {
+                    console.log('received default_waveform');
+                      alert('defaults to waveform.wbf, Please wait for page to reload. Click OK to continue')
+                    location.reload()
+                }
+            });
+        }
+
+        function detect_waveform() {
+            $.ajax({
+                url: '/detect_waveform',
+                type: "GET",
+                cache: false,
+                async: "true",
+                complete: function() {
+                    console.log('received detect_waveform');
+                    alert('Detecting waveform from EEPROM... Please wait for page to reload. Click OK to continue')
+                    setTimeout(function() {location.reload();}, 2000);
+                }
+            });
+        }
+
+
+
+        /// get vcom value and pass it to the serverside uisng ajax request
+        function set_Vcom() {
+            console.log('received set_Vcom');
+            var vcom_number = document.getElementById('vcom_value').value
+            console.log(vcom_number)
+            $.ajax({
+                url: '/set_Vcom',
+                type: "POST",
+                cache: false,
+                async: "true",
+                data: { vcom_number }
+            });
+            alert('Please wait for page to reload. Click OK to continue')
+            setTimeout(function() {location.reload();}, 2000);
+        }
+
+        function default_Vcom() {
+            console.log('received default_Vcom');
+            $.ajax({
+                url: '/default_Vcom',
+                type: "GET",
+                cache: false,
+                async: "true",
+                complete: function() {
+                    console.log('received default_Vcom');
+                     alert('VCOM: Default Please wait for page to reload. Click OK to continue')
+                     location.reload()
+                }
+
+            });
+        }
+
+         function detect_Vcom() {
+            console.log('received detect_Vcom');
+            $.ajax({
+                url: '/detect_Vcom',
+                type: "GET",
+                cache: false,
+                async: "true",
+                complete: function() {
+                    console.log('received detect_Vcom');
+                     alert('Detecting VCOM from EEPROM... Please wait for page to reload. Click OK to continue')
+                     location.reload()
+                }
+
+            });
+        }
+
+       
+        function viewLog(){
+     window.open('/logs/webapplication.log');           
+     
+}
+
+        </script>
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                   <div class="col-md-6 col-xs-12">
+                        <h3 id="current_WaveFileName">Uploaded WaveForm :</h3>
+                        <div class="scrollbar" id="style-1">
+                            <div id='waveList'> </div>
+                        </div>
+                    </div>
+                        <div class=" col-md-6 col-xs-12">
+                            <h3 id='wf_mode'>Waveform Mode: </h3>
+                            <div id="WaveId">
+                            </div>
+                            <h3 id='set_vcom'>Vcom Value: </h3>
+                            <form class="form-inline">
+                                <input type="text" class="form-control" id="vcom_value">
+                                <button class="btn btn-default" onclick="set_Vcom()" type="button">Set</button>
+                                <button class="btn btn-default" onclick="default_Vcom()" type="button">Default</button>
+                                <button class="btn btn-default" onclick="detect_Vcom()" type="button">Detect:VCOM</button>
+                                <span id="errmsg"></span>
+                            </form>
+                            <h3 id='Download_log'>Log File: </h3>
+                            
+                             <button class="btn btn-default" onclick="viewLog()" type="button">View</button>
+                             <a href="http://192.168.7.2/logs/cronlog" type=”_blank” download>
+                            <button class="btn btn-default"> Download</button>
+                                </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-6 col-xs-12"">
+                        <h3>Upload Waveform</h3>
+                        <div class="progress" id="progress2">
+                            <div id="progress-bar2" class="progress-bar" role="progressbar"></div>
+                        </div>
+                        <button class="btn btn-lg button2" type="button">Upload</button>
+                        <button class="btn btn-default" onclick="default_waveform()" type="button">Default</button>
+                        <button class="btn btn-default" onclick="detect_waveform()" type="button">Detect:WF</button>
+                        <input id="upload-input_waveform" type="file" name="uploads_waveform[]" multiple="multiple" accept=".wbf">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap/dist/js/jquery-3.0.0.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="javascripts/uploader_image.js"></script>
+    <script src="javascripts/uploader_waveform.js"></script>
+</body>
+
+</html>

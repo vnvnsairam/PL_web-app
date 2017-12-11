@@ -1,0 +1,63 @@
+{
+    "wavemodes": [
+    {
+        "id": 0,
+        "name": "INIT"
+    },
+    {
+        "id": 1,
+        "name": "DU"
+    },
+    {
+        "id": 2,
+        "name": "GC16"
+    },
+    {
+        "id": 3,
+        "name": "GC4"
+    },
+    {
+        "id": 4,
+        "name": "A2"
+    },
+    {
+        "id": 5,
+        "name": "GL16"
+    },
+    {
+        "id": 6,
+        "name": "A2IN"
+    },
+    {
+        "id": 7,
+        "name": "A2OUT"
+    },
+    {
+        "id": 8,
+        "name": "NF"
+    },
+    {
+        "id": 9,
+        "name": "GC16_long"
+    },
+    {
+        "id": 10,
+        "name": "NF"
+    },
+    {
+        "id": 11,
+        "name": "DU_tickle"
+    },
+    {
+        "id": 12,
+        "name": "A2_100ms"
+    },
+    {
+        "id": 13,
+        "name": "A2_100ms_tickle"
+    },
+    {
+        "id": 14,
+        "name": "NF"
+    }]
+}

@@ -1,0 +1,233 @@
+<!-- 
+This is "upload" view for handling the Plastic Logic web application(Smart display).Uploading, displaying and executing images
+# Copyright (C) 2017 Plastic Logic 
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+
+
+
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Plastic Logic App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <script src="bootstrap/dist/js/jquery-3.0.0.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="javascripts/uploader_image.js"></script>
+    <script src="javascripts/uploader_waveform.js"></script>
+    <script src="bootstrap/dist/js/jquery-3.0.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+</head>
+<!-- NAVBAR
+  ================================================== -->
+
+<body>
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="home">
+                            <img src="./assets/PL_13.png" alt="">
+                        </a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="home">Home</a></li>
+                            <li><a href="display_type">Display Type</a></li>
+                            <li class="active"><a href="upload_image">Upload</a></li>
+                            <li><a href="settings">Settings</a></li>
+                            <!--   <li><a href="console">console</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <script type="text/javascript">
+            $.ajax({
+            url: '/sendCurrentDisplayType',
+            type: "GET",
+            cache: false,
+            async: "true",
+            complete: function(data) {
+                console.log(data)
+                console.log(data.responseJSON)
+                var obj = data.responseJSON
+                var current_DisplayType = obj[0].currentdisplayType
+
+                display_Type.innerText = "Uploaded Images: " + current_DisplayType;
+                display_Type.style.fontWeight = 'bold';
+               console.log(current_DisplayType)
+               $('.list-group-item').focus(function(){
+                $(this).css('background-color', '#4CAF50')})
+                }
+
+        });
+
+
+
+        $.ajax({
+            url: '/upload_showImageList',
+            type: "GET",
+            cache: false,
+            async: "true",
+            complete: function(data) {
+                console.log(data)
+                console.log(data.responseJSON)
+                var imagelist = data.responseJSON
+                var list = "";
+                var routesImage = "/upload_image/";
+                // displays image list with delete as X
+                for (i = 0; i < imagelist.length; i++) {
+
+                    //var imgName = "<a href= 'javascript:void(0)' class='imageClicked' >" + imagelist[i] + "</a> "
+                    //console.log(imgName);
+                    var imgName = '<a href="' + routesImage + imagelist[i] + '">' + imagelist[i] + '</a>'
+                    //var imgName =  imagelist[i] 
+                    //console.log(imgName);
+                    list += "<li>" + imgName + "<a href= 'javascript:void(0)' class='deleteMe'> X</a> " + "</li>";
+                    //list += "<li>" + imgName +"<div class='deleteMe'>X</div>"+"</li>";
+                    //console.log(list);
+                }
+                $("#imageList").append("<ol>" + list + "</ol>");
+            }
+        });
+
+
+
+
+        $(document).ready(function() {
+            $(".deleteMe").on("click", function() {
+                //console.log($(this).closest("li")[0].innerText);
+                var text = $(this).closest("li")[0].innerText
+                var name = text.split(/\s+/);
+                name = name[0]
+                console.log(name);
+                $(this).closest("li").remove();
+                doAjax(makeUrl(name));
+
+                function makeUrl(name) {
+                    return '/deleteImage/' + name
+                }
+
+                function doAjax(_url) {
+                    return $.ajax({
+                        url: _url,
+                        cache: false,
+                        async: "true",
+                        type: 'DELETE',
+                        complete: function() {
+                            console.log('delete');
+                        }
+                    });
+                }
+
+
+            });
+        });
+
+
+        $(document).ready(function() {
+            $(".imageClicked").on("click", function() {
+                console.log($(this).closest("a")[0].innerText);
+                console.log('im here1')
+                var text = $(this).closest("a")[0].innerText
+                var name = text.split(/\s+/);
+                console.log(name)
+                name = name[0]
+                console.log(name);
+                doAjax(name);
+
+                function doAjax(url) {
+                    return $.ajax({
+                        url: '/upload_image/' + url,
+                        cache: false,
+                        async: "true",
+                        type: "GET",
+                        complete: function() {
+                            console.log('imageClicked');
+                        }
+                    });
+                }
+
+            });
+        });
+
+
+
+        function toInitiatization() {
+                    alert('Initiatizing the display please wait...Click OK to continue')
+            $.ajax({
+                url: '/toInitiatization',
+                type: "GET",
+                cache: false,
+                async: "true",
+                complete: function() {
+                    console.log('received toInitiatization');
+                }
+            });
+        }
+        </script>
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-5">
+                        <div>
+                            <button class="btn btn-default center-block" onclick="toInitiatization()">Clear/Initiatization</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 offset-md-2"></div>
+                <div class="row ">
+                    <div class=" col-xs-12 col-md-6 ">
+                        <h3 id='display_Type' value="bold" >Uploaded Images</h3>
+                        <div class="scrollbar " id="style-1">
+                            <div id='imageList'> </div>
+                        </div>
+                    </div>
+                    <div class=" col-xs-12 col-md-6  ">
+                        <h3>Image Uploader</h3>
+                        <div class="progress " id="progress1">
+                            <div id="progress-bar1" class="progress-bar" role="progressbar"></div>
+                        </div>
+                        <button class="btn btn-lg button1" type="button">Upload</button>
+                    </div>
+                    <input id="upload-input_image" type="file" name="uploads_image[]" multiple="multiple" accept="image/jpeg, image/png">
+                    </br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap/dist/js/jquery-3.0.0.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="javascripts/uploader_image.js"></script>
+    <script src="javascripts/uploader_waveform.js"></script>
+    <script src="bootstrap/dist/js/jquery-3.0.0.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+0,INIT
+1,DU
+2,GC16
+3,GC4
+4,A2
+5,GL16
+6,A2IN
+7,A2OUT
+8,NF
+9,GC16_long
+10,NF
+11,DU_tickle
+12,A2_100ms
+13,A2_100ms_tickle
+14,NF

@@ -1,0 +1,17 @@
+../src/main.c, line 215: operation '-start_epdc' failed
+Fatal error
+
+configparser     DISPLAYTYPE: D107_T3.1
+configparser     version - CONFIG_D107_T3.1
+
+configparser     Interface: Parallel
+hw-setup         initialize_nvm: Boardname: FALCON_PARALLEL
+main             load_nvm_content?: 0
+s1d135xx         Product code: 0x004F
+s1d135xx         Rev: 0100, conf: 001E
+s1d13524_controller Ready 1280x960
+max17135         rev 0x07, id 0x17
+max17135         Invalid product ID
+max17135         timings  on: vgl=12, vsl=7, vsh=2, vgh=23
+max17135         timings off: vgl=7, vsl=12, vsh=14, vgh=2
+v4.8.6
